@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-sm-4" th:each="product : ${productList}">
 				<div class="card mt-4">
-				<img th:src="${product.image}" class="card-img-top" alt="Product Image">
+				<img th:src="${product.image}" class="card-img-top" alt="Product Image" th:width="280" th:height="263">
 					<div class="card-body">
 						<h5 th:text="${product.productName}" class="card-title"></h5>
 						<p th:text="${product.productDescription}" class="card-text"></p>

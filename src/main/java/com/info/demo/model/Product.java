@@ -2,17 +2,7 @@ package com.info.demo.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
@@ -39,8 +29,11 @@ public class Product {
 	@JoinColumn(name = "category_id")
 	private Category category = new Category();
 
-	@ManyToMany(mappedBy = "productList",fetch = FetchType.EAGER)
-	private List<User> userList;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetail> orderDetailList;
+
+//	@ManyToMany(mappedBy = "productList",fetch = FetchType.EAGER)
+//	private List<User> userList;
 	
 	public Product() {
 		this.productName = "";
@@ -96,12 +89,21 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<User> getUserList() {
-		return userList;
+//	public List<User> getUserList() {
+//		return userList;
+//	}
+//
+//	public void setUserList(List<User> userList) {
+//		this.userList = userList;
+//	}
+
+
+	public List<OrderDetail> getOrderDetailList() {
+		return orderDetailList;
 	}
 
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
+	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
 	}
 
 	public int getProductUnit() {

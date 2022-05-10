@@ -34,14 +34,14 @@ public class UserServiceImpl implements UserService{
 		userRepository.save(user);
 	}
 
-	@Override
-	public void update(User user) {
-		List<Product> productlist1 = user.getProductList();
-		List<Product> productlist = (userRepository.findByEmail(user.getEmail())).getProductList();
-		productlist1.addAll(productlist);
-		user.setProductList(productlist1);
-		userRepository.save(user);
-	}
+//	@Override
+//	public void update(User user) {
+//		List<Product> productlist1 = user.getProductList();
+//		List<Product> productlist = (userRepository.findByEmail(user.getEmail())).getProductList();
+//		productlist1.addAll(productlist);
+//		user.setProductList(productlist1);
+//		userRepository.save(user);
+//	}
 
 	@Override
 	public List<User> findAllUser() {
