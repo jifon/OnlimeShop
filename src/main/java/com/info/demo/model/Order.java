@@ -1,8 +1,10 @@
 package com.info.demo.model;
 
 import org.hibernate.query.criteria.internal.expression.function.CurrentTimeFunction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -22,10 +24,11 @@ public class Order {
 
 
     @Column(nullable = false)
-    private CurrentTimeFunction orderDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date orderDate;
 
-    @Column(nullable = false)
-    private String orderLocation;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean completed;
 
 
     public long getOrderId() {
@@ -44,20 +47,12 @@ public class Order {
         this.user = user;
     }
 
-    public CurrentTimeFunction getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(CurrentTimeFunction orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
-    }
-
-    public String getOrderLocation() {
-        return orderLocation;
-    }
-
-    public void setOrderLocation(String orderLocation) {
-        this.orderLocation = orderLocation;
     }
 
     public List<OrderDetail> getOrderDetailList() {
@@ -66,5 +61,13 @@ public class Order {
 
     public void setOrderDetailList(List<OrderDetail> orderDetailList) {
         this.orderDetailList = orderDetailList;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

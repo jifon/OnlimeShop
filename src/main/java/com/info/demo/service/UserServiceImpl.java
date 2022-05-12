@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.info.demo.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,14 +35,14 @@ public class UserServiceImpl implements UserService{
 		userRepository.save(user);
 	}
 
-//	@Override
-//	public void update(User user) {
-//		List<Product> productlist1 = user.getProductList();
-//		List<Product> productlist = (userRepository.findByEmail(user.getEmail())).getProductList();
-//		productlist1.addAll(productlist);
-//		user.setProductList(productlist1);
-//		userRepository.save(user);
-//	}
+	@Override
+	public void update(User user) {
+		List<Order> orderList1 = user.getOrderList();
+		List<Order> orderList = (userRepository.findByEmail(user.getEmail())).getOrderList();
+		orderList1.addAll(orderList);
+		user.setOrderList(orderList1);
+		userRepository.save(user);
+	}
 
 	@Override
 	public List<User> findAllUser() {

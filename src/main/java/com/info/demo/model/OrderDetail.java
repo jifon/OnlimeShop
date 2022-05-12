@@ -19,10 +19,16 @@ public class OrderDetail {
     private Order order;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public OrderDetail() {
+    }
+
+    public OrderDetail(int quantity, Order order, Product product) {
+        this.quantity = quantity;
+        this.order = order;
+        this.product = product;
     }
 
     public long getOrderDetailId() {
