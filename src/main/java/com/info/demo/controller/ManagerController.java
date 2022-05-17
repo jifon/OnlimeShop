@@ -1,7 +1,11 @@
 package com.info.demo.controller;
 
+import com.info.demo.model.OrderDetail;
+import com.info.demo.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +20,9 @@ import com.info.demo.service.CategoryService;
 import com.info.demo.service.FileUploadService;
 import com.info.demo.service.ProductService;
 
+import java.util.Date;
+import java.util.List;
+
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
@@ -25,6 +32,9 @@ public class ManagerController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private OrderDetailService orderDetailService;
 	
 	@Autowired
 	private FileUploadService fileUploadService;
@@ -103,5 +113,23 @@ public class ManagerController {
 		mv.addObject("Product", productService.getProductById(Long.parseLong(productId)).get());
 		return mv;
 	}
+
+	//очет 1 самые продоваемые продукты (фильтр по времени)
+	@GetMapping("report1/{dateStart}/{dateEnd}")
+	public String reportFirst(@PathVariable("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateStart, @PathVariable("dateEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateEnd, Model model) {
+
+		List<OrderDetail> list2 =orderDetailService.findByDate(dateStart, dateEnd);
+		model.addAttribute("lists2", list2);
+		return "reportFirst";
+	}
+
+	@GetMapping("report2/{dateStart}/{dateEnd}")
+	public String reportSecond(@PathVariable("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateStart, @PathVariable("dateEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateEnd, Model model) {
+
+		List<OrderDetail> list2 =orderDetailService.findNotCompleted(dateStart, dateEnd);
+		model.addAttribute("lists2", list2);
+		return "reportSecond";
+	}
+
 
 }

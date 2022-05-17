@@ -39,7 +39,7 @@ public class User {
 		this.active = active;
 	}
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Order> orderList;
 
 //	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)

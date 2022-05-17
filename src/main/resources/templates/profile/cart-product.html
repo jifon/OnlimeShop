@@ -15,11 +15,10 @@
 				<span class="my-auto h6">Price</span>
 			</li>
 		</ul>
-		<ul class="list-group col-9" th:each="product : ${productList.getClass()}">
+		<ul class="list-group col-9" th:each="order : ${user.getOrderList}">
 			<li class="list-group-item d-flex justify-content-around">
-				<img th:src="${product.image}" height="100">
-				<span class="my-auto" th:text="${product.productName}"></span>
-				<span class="my-auto" th:text="'$ '+${product.productPrice}"></span>
+				<span class="my-auto" th:text="${order.orderId}"></span>
+				<span class="my-auto" th:text="'$ '+${order.orderDate}"></span>
 			</li>
 		</ul>
 		<ul class="list-group col-9">
