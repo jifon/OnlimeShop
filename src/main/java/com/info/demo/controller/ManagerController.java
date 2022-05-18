@@ -97,6 +97,8 @@ public class ManagerController {
 		mv.addObject("productList", productService.listProduct());
 		return mv;
 	}
+
+
 	
 	@GetMapping("delete-Product/{productId}")
 	public ModelAndView deleteProduct(@PathVariable("productId")String productId) {
@@ -115,12 +117,22 @@ public class ManagerController {
 	}
 
 	//очет 1 самые продоваемые продукты (фильтр по времени)
+	@PostMapping("/dates")
+	public String getDates(@RequestParam String startDate, @RequestParam String endDate){
+		return "redirect:/manager/report1/" + startDate + "/" + endDate;
+	}
+
+	@GetMapping("/forReportS")
+	public String forReportF() {
+		return "/manager/forReportS";
+	}
+
 	@GetMapping("report1/{dateStart}/{dateEnd}")
 	public String reportFirst(@PathVariable("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateStart, @PathVariable("dateEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateEnd, Model model) {
 
 		List<OrderDetail> list2 =orderDetailService.findByDate(dateStart, dateEnd);
 		model.addAttribute("lists2", list2);
-		return "reportFirst";
+		return "/manager/reportFirst";
 	}
 
 	@GetMapping("report2/{dateStart}/{dateEnd}")
@@ -128,7 +140,7 @@ public class ManagerController {
 
 		List<OrderDetail> list2 =orderDetailService.findNotCompleted(dateStart, dateEnd);
 		model.addAttribute("lists2", list2);
-		return "reportSecond";
+		return "/manager/reportSecond";
 	}
 
 
