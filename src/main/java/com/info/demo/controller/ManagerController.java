@@ -117,15 +117,29 @@ public class ManagerController {
 	}
 
 	//очет 1 самые продоваемые продукты (фильтр по времени)
-	@PostMapping("/dates")
-	public String getDates(@RequestParam String startDate, @RequestParam String endDate){
-		return "redirect:/manager/report1/" + startDate + "/" + endDate;
+
+	@GetMapping("/forReportF")
+	public String forReportF() {
+		return "/manager/forReportF";
 	}
 
 	@GetMapping("/forReportS")
-	public String forReportF() {
+	public String forReportS() {
 		return "/manager/forReportS";
 	}
+
+
+	@PostMapping("/datesF")
+	public String getDatesF(@RequestParam String startDate, @RequestParam String endDate){
+		return "redirect:/manager/report1/" + startDate + "/" + endDate;
+	}
+
+	@PostMapping("/datesS")
+	public String getDatesS(@RequestParam String startDate, @RequestParam String endDate){
+		return "redirect:/manager/report2/" + startDate + "/" + endDate;
+	}
+
+
 
 	@GetMapping("report1/{dateStart}/{dateEnd}")
 	public String reportFirst(@PathVariable("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateStart, @PathVariable("dateEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateEnd, Model model) {
